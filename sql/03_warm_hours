@@ -1,6 +1,0 @@
-SELECT (forecast_time AT TIME ZONE 'Asia/Tashkent') AS forecast_time,
-        temperature
-  FROM weather_hourly
- WHERE temperature > (SELECT AVG(temperature) 
-                       FROM weather_hourly);
- ORDER BY 1
