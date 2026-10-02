@@ -57,17 +57,16 @@ def transform(data: dict) -> list:
     return rows
 
 def load(rows:list[tuple]) -> int: 
+    connection = psycopg2.connect(
+        host = os.getenv("POSTGRES_HOST", "localhost"),
+        port = os.getenv("POSTGRES_PORT", "5432"),
+        dbname = os.getenv("POSTGRES_DB"),
+        user = os.getenv("POSTGRES_USER"),
+        password = os.getenv("POSTGRES_PASSWORD"),
+    )
+
+
     try:
-        connection = psycopg2.connect(
-            host = os.getenv("POSTGRES_HOST", "localhost"),
-            port = os.getenv("POSTGRES_PORT", "5432"),
-            dbname = os.getenv("POSTGRES_DB"),
-            user = os.getenv("POSTGRES_USER"),
-            password = os.getenv("POSTGRES_PASSWORD"),
-        )
-
-
-
         sql = """
             INSERT INTO weather_hourly (
                 city,
